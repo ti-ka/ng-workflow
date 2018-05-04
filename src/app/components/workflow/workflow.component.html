@@ -1,0 +1,33 @@
+<div
+     (mouseup)="discardConnection()"
+     class="drag-boundary {{workflow && workflow.draggable ? 'draggable' : 'not-draggable' }}" #container>
+
+
+    <app-node *ngFor="let node of nodes"
+              [node]="node"
+              [workflow]="workflow"
+              [gridSize]="gridSize"
+              [container]="container"></app-node>
+
+    <app-connection
+            *ngFor="let connection of connections"
+            [connection]="connection"
+            [workflow]="workflow"
+            [gridSize]="gridSize"
+            [color]="connection.color || lineColor"
+            [container]="container"></app-connection>
+
+    <app-connection
+            *ngIf="workflow.creatingConnection"
+            [connection]="workflow.creatingConnection"
+            [workflow]="workflow"
+            [gridSize]="gridSize"
+            [color]="workflow.creatingConnection.color || lineColor"
+            [container]="container"></app-connection>
+
+</div>
+
+
+<pre>
+{{ workflow | json }}
+</pre>

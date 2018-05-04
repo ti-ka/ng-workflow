@@ -19,7 +19,7 @@
       "testTsconfig": "tsconfig.spec.json",
       "prefix": "app",
       "styles": [
-        "styles.css"
+        "styles.scss"
       ],
       "scripts": [],
       "environmentSource": "environments/environment.ts",
@@ -54,14 +54,14 @@
     }
   },
   "defaults": {
-    "styleExt": "css",
+    "styleExt": "scss",
     "class": {
       "spec": false
     },
     "component": {
+      "spec": false,
       "inlineStyle": true,
-      "inlineTemplate": true,
-      "spec": false
+      "inlineTemplate": true
     },
     "directive": {
       "spec": false

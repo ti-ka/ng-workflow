@@ -1,0 +1,26 @@
+<div
+        *ngIf="node && workflow"
+        #nodeView
+
+        [id]="node.id"
+        [inBounds]="true"
+        [style.top.px]=""
+        [style.left.px]=""
+        [bounds]="container"
+        (movingOffset)="onMove($event)"
+        (stopped)="onRelease($event)"
+        [position]="{x: xOffset, y: yOffset}"
+        class="node"
+        [handle]="dragHandle"
+        ngDraggable >
+
+    <span class="connector connector-left" (mousedown)="connectorSelected($event)" (mouseup)="connectorReleased($event)"></span>
+    <span class="connector connector-bottom" (mousedown)="connectorSelected($event)" (mouseup)="connectorReleased($event)"></span>
+    <span class="connector connector-top" (mousedown)="connectorSelected($event)" (mouseup)="connectorReleased($event)"></span>
+    <span class="connector connector-right" (mousedown)="connectorSelected($event)" (mouseup)="connectorReleased($event)"></span>
+
+    <div class="node-content" #dragHandle>
+        {{ node.title }}
+    </div>
+
+</div>

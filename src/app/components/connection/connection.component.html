@@ -1,0 +1,13 @@
+<app-poly-line
+        *ngIf="connection"
+        [lineColor]="connection.color || color"
+        [fromSide]="connection.fromSide"
+        [toSide]="connection.toSide"
+        [from]="startCoordinates"
+        [title]="connection.title"
+        [to]="endCoordinates">
+</app-poly-line>
+
+<div style="display: none !important;">
+    {{ xy }}
+</div>
