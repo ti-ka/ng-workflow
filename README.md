@@ -1,8 +1,11 @@
-#Angular workflow
+# Angular workflow
 
 A simple and powerful engine for creating workflow in angular
 
-Note: This library is a work in progress. To contribute email: tika.pahadi@selu.edu
+![alt text](https://raw.githubusercontent.com/PAHADIx/ng-workflow/master/preview.png)
+
+
+* Note: This library is a work in progress. To contribute email: tika.pahadi@selu.edu
 
 Usage:
 ```
