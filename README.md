@@ -5,6 +5,7 @@ A simple and powerful engine for creating workflow in angular
 Demo: https://dev.tika.me/ng-workflow/
 
 ![alt text](https://dev.tika.me/ng-workflow/demo.gif)
+![alt text](https://github.com/ti-ka/ng-workflow/raw/master/preview.png)
 
 
 * Note: This library is a work in progress. To contribute email: tika.pahadi@selu.edu
