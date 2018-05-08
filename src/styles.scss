@@ -1,131 +1,124 @@
-
 .drag-boundary {
-    box-sizing: border-box;
+  box-sizing: border-box;
 }
 .drag-boundary *, .drag-boundary *:before, .drag-boundary *:after {
-    box-sizing: inherit;
+  box-sizing: inherit;
 }
 
 .drag-boundary {
-    display: block;
-    width: 100%;
-    height: 100%;
-    background: #f9f9f9;
-    padding: 0;
-    height: 500px;
-    -webkit-user-select: none;  /* Chrome all / Safari all */
-    -moz-user-select: none;     /* Firefox all */
-    -ms-user-select: none;      /* IE 10+ */
-    user-select: none;          /* Likely future */
-    position: relative;
+  display: block;
+  width: 100%;
+  height: 100%;
+  background: #f9f9f9;
+  padding: 0;
+  height: 500px;
+  -webkit-user-select: none;  /* Chrome all / Safari all */
+  -moz-user-select: none;     /* Firefox all */
+  -ms-user-select: none;      /* IE 10+ */
+  user-select: none;          /* Likely future */
+  position: relative;
 }
 
 .node {
-    display: inline-block;
-    max-width: 100px;
-    border: 0px solid darkgray;
-    background: white;
-    background: #e5e5e5;
-    position: relative;
-    border-radius: 2px;
-    z-index: 3;
-    cursor: pointer;
-    font-size: 14px;
-    position: absolute;
+  display: inline-block;
+  max-width: 100px;
+  border: 0px solid darkgray;
+  background: white;
+  background: #e5e5e5;
+  position: relative;
+  border-radius: 2px;
+  z-index: 3;
+  cursor: pointer;
+  font-size: 14px;
+  position: absolute;
 }
 
 .node .connector {
-    content: '';
-    width: 10px;
-    height: 10px;
-    border: 2px solid darkgray;
-    border-radius: 50%;
-    position: absolute;
-    background: white;
-    top: auto; left: auto;
-    margin-left: -6px;
-    margin-top: -6px;
-    z-index: 5;
-    display: none;
+  content: '';
+  width: 10px;
+  height: 10px;
+  border: 2px solid darkgray;
+  border-radius: 50%;
+  position: absolute;
+  background: white;
+  top: auto; left: auto;
+  margin-left: -6px;
+  margin-top: -6px;
+  z-index: 5;
+  display: none;
 }
 
 .node-content {
-    z-index: 4;
-    border: 2px solid darkgray;
-    margin: 0;
+  z-index: 4;
+  border: 2px solid darkgray;
+  margin: 0;
 }
 
 
 svg {
-    z-index: 2;
-    position: absolute; top:0; left:0;
-    height:100%; width:100%
+  z-index: 2;
+  position: absolute; top:0; left:0;
+  height:100%; width:100%
 }
 
 .node .connector-left {
-    top: 50%; left: 0;
+  top: 50%; left: 0;
 }
 .node .connector-top {
-    top: 0; left: 50%;
+  top: 0; left: 50%;
 }
 .node .connector-right {
-    top: 50%; left: 100%;
+  top: 50%; left: 100%;
 }
 .node .connector-bottom {
-    top: 100%; left: 50%;
+  top: 100%; left: 50%;
 }
 
 .connector.connected {
-    background: darkgray;
+  background: darkgray;
 }
 
 .connected-to::before {
-    content: '';
-    display: inline-block;
-    color: darkgray;
-    height: 6px; width: 6px;
-    position: absolute;
-    top: 0;
-    left: 0;
-    margin-left: 0;
-    margin-top: 0;
+  content: '';
+  display: inline-block;
+  color: darkgray;
+  height: 6px; width: 6px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  margin-left: 0;
+  margin-top: 0;
 }
 
 .triangle.triangle-left {
-    transform: translate(-8px, -5px);
+  transform: translate(-8px, -5px);
 }
 
 .triangle.triangle-top {
-    transform: translate(-5px, -8px);
+  transform: translate(-5px, -8px);
 }
 
 .triangle.triangle-bottom {
-    transform: translate(-5px, -1px); //-5px -8px
+  transform: translate(-5px, -1px); //-5px -8px
 }
 
 .triangle.triangle-right {
-    transform: translate(-1px, -5px); //-5px -8px
+  transform: translate(-1px, -5px); //-5px -8px
 }
-
-
 
 
 
 .node:hover .connector,
 .not-draggable .node .connector{
-    display: block;
-    display: block;
-    transform: scale(1.5);
-    cursor: pointer;
+  display: block;
+  display: block;
+  transform: scale(1.5);
+  cursor: pointer;
 }
 
-polyline {
-    padding: 20px;
-    background: red;
+.connector:hover {
+  background: darkgray;
 }
-
-
-
 
 
 

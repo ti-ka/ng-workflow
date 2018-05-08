@@ -4,6 +4,7 @@
 
 
     <app-node *ngFor="let node of nodes"
+              (click)="getClickEvent(node)"
               [node]="node"
               [workflow]="workflow"
               [gridSize]="gridSize"
@@ -11,23 +12,21 @@
 
     <app-connection
             *ngFor="let connection of connections"
+            (click)="getClickEvent(connection)"
             [connection]="connection"
             [workflow]="workflow"
             [gridSize]="gridSize"
             [color]="connection.color || lineColor"
             [container]="container"></app-connection>
 
+    <!-- For ongoing connection -->
     <app-connection
             *ngIf="workflow.creatingConnection"
             [connection]="workflow.creatingConnection"
             [workflow]="workflow"
             [gridSize]="gridSize"
             [color]="workflow.creatingConnection.color || lineColor"
-            [container]="container"></app-connection>
+            [container]="container">
+    </app-connection>
 
 </div>
-
-
-<pre>
-{{ workflow | json }}
-</pre>

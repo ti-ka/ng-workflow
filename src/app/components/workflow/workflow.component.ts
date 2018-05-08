@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { WorkflowNode, Connection, Workflow } from '../../models/workflow-models';
+import { WorkflowNode, WorkflowConnection, Workflow } from '../../models/workflow-models';
 
 @Component({
     selector: 'ng-workflow',
@@ -10,7 +10,7 @@ import { WorkflowNode, Connection, Workflow } from '../../models/workflow-models
 export class WorkflowComponent implements OnInit {
 
     @Input() public nodes: WorkflowNode[];
-    @Input() public connections: Connection[];
+    @Input() public connections: WorkflowConnection[];
     @Input() workflow: Workflow;
     @Input() gridSize: number = 10;
     @Input() lineColor = 'darkgray';
@@ -19,18 +19,26 @@ export class WorkflowComponent implements OnInit {
     // and also prevent circular dependency
     // Example: if A → B. them B → A is not allowed.
     // However, B → C → A will be allowed
-    @Input() allowCircularDependency = false;
+    @Input() allowCircular = false;
 
     constructor() { }
 
     ngOnInit() {
         this.workflow = new Workflow();
+        this.workflow.allowCircular = this.allowCircular;
         this.workflow.nodes = this.nodes;
         this.workflow.connections = this.connections;
     }
 
     discardConnection () {
         this.workflow.discardCurrentConnection();
+    }
+
+    getClickEvent(e: WorkflowConnection | WorkflowNode) {
+        if (e.click) {
+            return e.click(e);
+        }
+        return () => {};
     }
 
 }

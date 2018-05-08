@@ -1,8 +1,11 @@
+import { Input } from '@angular/core';
+
 export class WorkflowNode {
     id?: number | string;
     title: string;
     x?: number;
     y?: number;
+    click?: (WorkflowNode) => void;
 
     constructor(title: string, id: number | string = null, x? : number, y?: number) {
         this.title = title;
@@ -13,18 +16,21 @@ export class WorkflowNode {
 
 }
 
-export class Connection {
+export class WorkflowConnection {
     from: WorkflowNode;
     to: WorkflowNode;
     title?: string;
     fromSide?: 'top' | 'left' | 'bottom' | 'right' = 'right';
     toSide?: 'top' | 'left' | 'bottom' | 'right' = 'left';
     color?: string;
+    click?: (Connection) => void;
 }
 
 export class XYCoordinates {
     x : number;
     y : number;
+    width?: number;
+    angle?: number;
     constructor(x?: number, y?: number) {
         this.x = x || 0;
         this.y = y || 0;
@@ -34,39 +40,70 @@ export class XYCoordinates {
 export class Workflow {
 
     nodes: WorkflowNode[];
-    connections: Connection[];
+    connections: WorkflowConnection[];
 
+    @Input() allowCircular = false;
     draggable = true;
 
-    creatingConnection: Connection;
+    creatingConnection: WorkflowConnection;
 
     startCreatingConnection(fromSide: 'top' | 'left' | 'bottom' | 'right' = 'right', fromNode: WorkflowNode) {
-        this.creatingConnection = new Connection();
+        this.creatingConnection = new WorkflowConnection();
         this.creatingConnection.fromSide = fromSide;
         this.creatingConnection.from = fromNode;
         this.draggable = false;
     }
 
     finishCreatingConnection(toSide: 'top' | 'left' | 'bottom' | 'right' = 'right', toNode: WorkflowNode) {
-        this.creatingConnection.toSide = toSide;
-        this.creatingConnection.to = toNode;
 
-        if (this.creatingConnection.from.title || this.creatingConnection.to.title) {
-            this.creatingConnection.title = `${this.creatingConnection.from.title} to ${this.creatingConnection.to.title}`
+        const newConnection = Object.assign(new WorkflowConnection(), this.creatingConnection);
+
+        newConnection.toSide = toSide;
+        newConnection.to = toNode;
+
+        if (newConnection.from.title || newConnection.to.title) {
+            newConnection.title = `${newConnection.from.title} to ${newConnection.to.title}`
         }
 
-        if (this.creatingConnection.from === this.creatingConnection.to) {
+        if (newConnection.from === newConnection.to) {
             console.warn('Cannot move from same node to same node.');
             return;
         }
 
-        this.connections.push(this.creatingConnection);
-        this.draggable = true;
+        if (!this.allowCircular) {
+            // See if a connection exists from newConnection.to & newConnection.from
+            const circular = this.connections.find(c => c.from == newConnection.to && c.to == newConnection.from);
+            if (circular) {
+                console.warn('Circular dependency detected. If this was intended, set [allowCircular]="true".');
+                this.discardCurrentConnection();
+                return;
+            }
+        }
+
+        this.connections.push(newConnection);
+        this.discardCurrentConnection();
     }
 
     discardCurrentConnection() {
         this.creatingConnection = null;
         this.draggable = true;
+    }
+
+    deleteNode(node: WorkflowNode) {
+        const index = this.nodes.indexOf(node);
+        if (index >= 0) {
+            // First delete connections to and from node:
+            this.connections.filter(c => c.from == node || c.to == node).forEach(c => this.deleteConnection(c));
+            this.nodes.splice(index, 1);
+        }
+    }
+
+    deleteConnection(connection: WorkflowConnection) {
+        console.log(connection);
+        const index = this.connections.indexOf(connection);
+        if (index >= 0) {
+            this.connections.splice(index, 1);
+        }
     }
 
 }

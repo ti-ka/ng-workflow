@@ -1,13 +1,83 @@
-<app-poly-line
-        *ngIf="connection"
-        [lineColor]="connection.color || color"
-        [fromSide]="connection.fromSide"
-        [toSide]="connection.toSide"
-        [from]="startCoordinates"
-        [title]="connection.title"
-        [to]="endCoordinates">
-</app-poly-line>
+<div #div>
 
-<div style="display: none !important;">
-    {{ xy }}
+    <ng-container *ngIf="points">
+
+        <app-svg-line
+                *ngIf="connection"
+                [lineColor]="connection.color || color"
+                [toSide]="connection.toSide"
+                [title]="connection.title"
+                [points]="points">
+        </app-svg-line>
+
+        <div
+            *ngIf="titleCoordinates"
+            [style.borderColor]="color"
+            [style.borderWidth]="width"
+            [style.left.px]="titleCoordinates.x"
+            [style.top.px]="titleCoordinates.y"
+            class="line-label">
+
+            <div
+                *ngIf="connection.title"
+                class="line-label-title"
+                [style.color]="color">
+                {{ connection.title }}
+            </div>
+
+            <div class="workflow-cross"
+                 stop-propagation
+                 (click)="workflow.deleteConnection(connection)">✕</div>
+        </div>
+
+    </ng-container>
+
 </div>
+
+
+
+
+
+<!--
+
+<div
+    *ngFor="let point of points"
+    [style.borderColor]="color"
+    [style.borderWidth]="width"
+    [style.left.px]="point.x"
+    [style.top.px]="point.y"
+    [style.width.px]="point.width"
+    [style.transform]="'rotate(' + point.angle + 'rad)'"
+    class="line">
+</div>
+
+<div
+        *ngIf="width === null && connection.toSide === 'left'"
+        [style.borderLeftColor]="color"
+        [style.marginTop.px]="-width/2"
+        [style.marginLeft.px]="-width/2"
+        class="arrow">
+</div>
+<div
+        *ngIf="width === null && connection.toSide === 'top'"
+        [style.borderTopColor]="color"
+        [style.marginTop.px]="-width/2"
+        [style.marginLeft.px]="-width/2"
+        class="arrow">
+</div>
+<div
+        *ngIf="width === null && connection.toSide === 'right'"
+        [style.borderRightColor]="color"
+        [style.marginTop.px]="-width/2"
+        [style.marginLeft.px]="-width/2"
+        class="arrow">
+</div>
+<div
+        *ngIf="width === null && connection.toSide === 'bottom'"
+        [style.borderBottomColor]="color"
+        [style.marginTop.px]="-width/2"
+        [style.marginLeft.px]="-width/2"
+        class="arrow">
+</div>
+
+-->

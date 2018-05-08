@@ -28,10 +28,6 @@ export class NodeComponent implements OnInit {
 
     onMove(e) {
         if (this.workflow.draggable) {
-            // if (e.x < 0) { e.x = 0 }
-            // if (e.y < 0) { e.y = 0 }
-            // if (e.x > this.container.offsetWidth) { e.x = this.container.offsetWidth }
-            // if (e.y > this.container.offsetHeight) { e.y = this.container.offsetHeight }
             this.node.x = e.x;
             this.node.y = e.y;
         }
@@ -40,8 +36,8 @@ export class NodeComponent implements OnInit {
     onRelease(e) {
         // Snap to grid on release
         if (this.workflow.draggable) {
-            this.node.x = Math.floor(this.node.x/this.gridSize) * this.gridSize;
-            this.node.y = Math.floor(this.node.y/this.gridSize) * this.gridSize;
+            // this.node.x = Math.floor(this.node.x/this.gridSize) * this.gridSize;
+            // this.node.y = Math.floor(this.node.y/this.gridSize) * this.gridSize;
         }
     }
 

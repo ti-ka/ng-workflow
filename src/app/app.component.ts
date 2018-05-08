@@ -1,14 +1,13 @@
 import { Component } from '@angular/core';
-import { WorkflowNode, Connection } from './models/workflow-models';
+import { WorkflowNode, WorkflowConnection } from './models/workflow-models';
 
 @Component({
     selector: 'app-root',
     template: `
-        <button (click)="saveCurrent()">Save</button>
-        <button (click)="reset()">Reset</button>
         <ng-workflow
                 [lineColor]="'navy'"
                 [nodes]="nodes"
+                [allowCircular]="false"
                 [connections]="connections"></ng-workflow>
     `,
     styles: []
@@ -16,75 +15,87 @@ import { WorkflowNode, Connection } from './models/workflow-models';
 export class AppComponent {
 
     nodes: WorkflowNode[] = [];
-    connections: Connection[] = [];
+    connections: WorkflowConnection[] = [];
 
 
     constructor() {
-        this.someNodes();
-        this.fetchNodes();
-    }
 
-    someNodes(){
-        this.nodes.push(new WorkflowNode('Start', 'start', 100, 100))
-        this.nodes.push(new WorkflowNode('Verify', 'verify', 220, 20))
-        this.nodes.push(new WorkflowNode('Finish', 'finish'))
-        this.nodes.push(new WorkflowNode('Test3', 'test3'))
-        this.nodes.push(new WorkflowNode('Test4', 'test4'))
+        this.nodes = [{
+            "title": "Start",
+            "id": "start",
+            "x": 32,
+            "y": 84
+        }, {
+            "title": "Verify",
+            "id": "verify",
+            "x": 538,
+            "y": 376
+        }, {
+            "title": "Test",
+            "id": "test",
+            "x": 92,
+            "y": 321
+        }, {
+            "title": "Review",
+            "id": "review",
+            "x": 288,
+            "y": 155
+        }, {
+            "title": "Finish",
+            "id": "finish",
+            "x": 760,
+            "y": 263
+        }];
 
         this.connections.push({
             from: this.nodes[0],
             to: this.nodes[1],
-            title: 'Start',
+            title: 'Start to verify',
             fromSide: 'right',
             toSide: 'left',
             color: 'navy'
         })
-        //
-        // this.connections.push({
-        //     from: this.nodes[0],
-        //     to: this.nodes[2],
-        //     fromSide: 'bottom',
-        //     toSide: 'left'
-        // })
-        //
-        // this.connections.push({
-        //     from: this.nodes[2],
-        //     to: this.nodes[3],
-        //     fromSide: 'right',
-        //     toSide: 'left',
-        // })
-        //
-        // this.connections.push({
-        //     from: this.nodes[3],
-        //     to: this.nodes[4],
-        //     fromSide: 'right',
-        //     toSide: 'bottom',
-        // })
-        //
-        // this.connections.push({
-        //     from: this.nodes[4],
-        //     to: this.nodes[1],
-        //     fromSide: 'right',
-        //     toSide: 'bottom',
-        // })
 
+        this.connections.push({
+            from: this.nodes[0],
+            to: this.nodes[2],
+            fromSide: 'bottom',
+            toSide: 'left',
+        })
+
+        this.connections.push({
+            from: this.nodes[3],
+            to: this.nodes[1],
+            fromSide: 'bottom',
+            toSide: 'top',
+            title: 'Review to verify',
+        })
+
+        this.connections.push({
+            from: this.nodes[3],
+            to: this.nodes[4],
+            fromSide: 'right',
+            toSide: 'top',
+            title: 'Review to finish',
+        })
+
+
+        this.connections.push({
+            from: this.nodes[1],
+            to: this.nodes[4],
+            fromSide: 'right',
+            toSide: 'bottom',
+            title: 'Verify to finish',
+        })
+
+
+        this.connections.push({
+            from: this.nodes[2],
+            to: this.nodes[3],
+            fromSide: 'right',
+            toSide: 'left',
+            title: 'Test to review',
+        })
 
     }
-
-    saveCurrent() {
-        localStorage.setItem('nodes', JSON.stringify(this.nodes));
-        localStorage.setItem('connections', JSON.stringify(this.connections));
-    }
-
-    fetchNodes() {
-        this.nodes = JSON.parse(localStorage.getItem('nodes')) || this.nodes;
-        this.connections = JSON.parse(localStorage.getItem('connections')) || this.connections;
-    }
-
-    reset() {
-        localStorage.removeItem('nodes')
-        localStorage.removeItem('connections')
-    }
-
-
 }

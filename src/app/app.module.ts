@@ -5,8 +5,9 @@ import { WorkflowComponent } from './components/workflow/workflow.component';
 import { NodeComponent } from './components/node/node.component';
 import { ConnectorComponent } from './components/connection/connection.component';
 import { HtmlPipe } from './pipes/HtmlPipe';
-import { RectangularPolyLine } from './components/svg-line/svg-line.component';
+import { SvgLineComponent } from './components/svg-line/svg-line.component';
 import { AngularDraggableDirective } from './directive/angular-draggable.directive';
+import { StopPropagationDirective } from './directive/stop-propagation.directive';
 
 
 @NgModule({
@@ -16,15 +17,16 @@ import { AngularDraggableDirective } from './directive/angular-draggable.directi
         NodeComponent,
         ConnectorComponent,
         HtmlPipe,
-        RectangularPolyLine,
+        SvgLineComponent,
         AngularDraggableDirective,
+        StopPropagationDirective
     ],
     imports: [
         BrowserModule
     ],
     providers: [],
     exports: [
-        WorkflowComponent
+        WorkflowComponent,
     ],
     bootstrap: [AppComponent]
 })

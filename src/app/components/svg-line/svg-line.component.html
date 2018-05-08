@@ -1,6 +1,48 @@
 <svg [innerHTML]="polyLine | html">
 </svg>
 
-<div style="display: none !important;">
-    {{ xy }}
+<!--
+<div
+        *ngFor="let point of coordinates"
+        [style.display]="'none'"
+
+        [style.borderColor]="lineColor"
+        [style.borderWidth]="lineWidth"
+        [style.left.px]="point.x"
+        [style.top.px]="point.y"
+        [style.width.px]="point.width"
+        [style.transform]="'rotate(' + point.angle + 'rad)'"
+        class="line">
+
+    <div
+            *ngIf="point.width === null && toSide === 'left'"
+            [style.borderLeftColor]="lineColor"
+            [style.marginTop.px]="-lineWidth/2"
+            [style.marginLeft.px]="-lineWidth/2"
+            class="arrow">
+    </div>
+    <div
+            *ngIf="point.width === null && toSide === 'top'"
+            [style.borderTopColor]="lineColor"
+            [style.marginTop.px]="-lineWidth/2"
+            [style.marginLeft.px]="-lineWidth/2"
+            class="arrow">
+    </div>
+    <div
+            *ngIf="point.width === null && toSide === 'right'"
+            [style.borderRightColor]="lineColor"
+            [style.marginTop.px]="-lineWidth/2"
+            [style.marginLeft.px]="-lineWidth/2"
+            class="arrow">
+    </div>
+    <div
+            *ngIf="point.width === null && toSide === 'bottom'"
+            [style.borderBottomColor]="lineColor"
+            [style.marginTop.px]="-lineWidth/2"
+            [style.marginLeft.px]="-lineWidth/2"
+            class="arrow">
+    </div>
+
+
 </div>
+-->

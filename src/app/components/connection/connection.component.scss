@@ -1,14 +1,20 @@
 .line-label {
   position: absolute;
   color: white;
-  font-size: .6em;
+  font-size: .7em;
   background: white;
   border-style: solid;
   border-width: 2px;
-  padding: .25em .5em;
+  padding: .2em;
   transform: translateY(-50%) translateX(-50%);
   z-index: 4;
   cursor: pointer;
+
+  .line-label-title {
+    padding: 0em .2em;
+    background: white;
+  }
+
 }
 
 .workflow-cross {
@@ -26,10 +32,12 @@
   text-align: center;
   border-radius: 100%;
   transform: translateX(50%) translateY(-50%);
+  z-index: 5;
   display: none;
 }
 
-.line-label:hover .workflow-cross {
+.line-label:hover .workflow-cross
+{
   display: block;
 }
 
